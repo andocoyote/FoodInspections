@@ -7,10 +7,11 @@ import pandas as pd
 
 # This is a base class from which all specific types of searcher classes will derive
 class Searcher:
-    MinSearchStringLength = 1
-    DefaultSearchTerm = None
-    FriendlySearchType = None
-    SearchType = None
+    def __init(self):
+        self.MinSearchStringLength = 1
+        self.DefaultSearchTerm = None
+        self.FriendlySearchType = None
+        self.SearchType = None
     
     # This is the main search function that all derived classes will use
     def SearchFunction(self):
@@ -61,7 +62,7 @@ class RestaurantSearcher(Searcher):
 
 
 MenuOptions = {'1' : ZipCodeSearcher(), '2' : CitySearcher(), '3' : RestaurantSearcher()}
-Search_Type = {'1' : 'zip_code', '2' : 'city', '3' : 'name'}
+SearchType = {'1' : 'zip_code', '2' : 'city', '3' : 'name'}
 
 
 # This method displays a menu for the user to select the kind of search they'd like to perform
@@ -75,7 +76,7 @@ def DisplayMenu():
     return selection
 
 
-# This method performs the action search using the King County API:
+# This method performs the actual search using the King County API:
 # Parameters
 #   search_type: e.g. zip_code, city, name
 #   search_term: e.g. 98034, kirkland, pizza hut
@@ -128,7 +129,7 @@ if __name__ == "__main__":
     selection = DisplayMenu()
     
     # Based on the menu choice, obtain the search type and term for which to search
-    search_type = Search_Type[selection]
+    search_type = SearchType[selection]
     search_term = MenuOptions[selection].SearchFunction()
 
     # Call King County's food establishment inspection API
