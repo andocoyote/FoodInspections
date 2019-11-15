@@ -7,7 +7,7 @@ import pandas as pd
 
 # This is a base class from which all specific types of searcher classes will derive
 class Searcher:
-    def __init(self):
+    def __init__(self):
         self.MinSearchStringLength = 1
         self.DefaultSearchTerm = None
         self.FriendlySearchType = None
@@ -85,7 +85,7 @@ def DisplayMenu():
 #   json data from the API call
 def GetData(search_type, search_term):
     url = 'https://data.kingcounty.gov/resource/f29f-zza5.json'
-    header = {'X-App-Token':'LwAqwxdgdAINxx7I4rJ1PRiVm'}
+    header = {'X-App-Token':<your app token in quotes>}
 
     start_date = input('Enter the start date (yyyy-mm-dd): ')
     if (len(start_date)) < 10:
