@@ -1,6 +1,8 @@
 import requests
 import json
 import pandas as pd
+import os.path
+from os import path
 
 
 # Snoqualmie: 98065
@@ -84,8 +86,22 @@ def DisplayMenu():
 #   Requests.Response object
 #   json data from the API call
 def GetData(search_type, search_term):
+
+    # Read the user's app token from apptoken.txt
+    # or get the app token from the user and write it to the file
+    if path.isfile('apptoken.txt'):
+        app_token_file = open('apptoken.txt', 'r')
+        app_token = app_token_file.read()
+
+    else:
+        app_token = input('Enter your app token: ')
+        app_token_file = open('apptoken.txt', 'w')
+        app_token_file.write(app_token)
+
+    app_token_file.close()
+
     url = 'https://data.kingcounty.gov/resource/f29f-zza5.json'
-    header = {'X-App-Token':<your app token in quotes>}
+    header = {'X-App-Token':app_token}
 
     start_date = input('Enter the start date (yyyy-mm-dd): ')
     if (len(start_date)) < 10:
@@ -123,7 +139,7 @@ def GetData(search_type, search_term):
 
 
 # This is the main method
-if __name__ == "__main__":
+if __name__ == '__main__':
 
     # Get the menu choice from the user
     selection = DisplayMenu()
